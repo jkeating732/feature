@@ -31,8 +31,8 @@
       shell: echo "{{ item.private_ip }}" >> hosts
       with_items: "{{ ec2.instances }}"
 
-    - name: wait 300 seconds and continue
-      wait_for: timeout=300
+    - name: wait 100 seconds and continue
+      wait_for: timeout=100
       delegate_to: localhost
 
     - name: Wait for system to become reachable
