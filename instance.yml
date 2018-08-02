@@ -10,7 +10,7 @@
       ec2:
         key_name: LinuxKeyPair
         region: us-west-2
-        vpc_subnet_id: subnet-d8de6990
+        vpc_subnet_id: subnet-42de4824
         group_id: sg-5efc7d23
         instance_type: t2.micro
         image: "{{ ami_id }}"
