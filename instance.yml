@@ -48,7 +48,9 @@
   become: true
 
   tasks:
+    - name: Update yum
+      shell: yum update -y
     - name: Install NTP Service
-      shell: yum install ntp
+      shell: yum install ntp -y
     - name: Check NTP service
       service: name=ntp state=started
