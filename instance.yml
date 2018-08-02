@@ -45,7 +45,10 @@
   name: configuration play
   user: ec2-user
   gather_facts: true
+  become: true
 
   tasks:
+    - name: Install NTP Service
+      shell: yum install ntp
     - name: Check NTP service
       service: name=ntp state=started
