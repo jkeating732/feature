@@ -15,7 +15,7 @@
         instance_type: t2.micro
         image: "{{ ami_id }}"
         wait: yes 
-        exact_count: 1
+        exact_count: 2
         count_tag:
           Name: ec2-Demo
         instance_tags:
