@@ -21,7 +21,7 @@
       with_items: "{{ ec2_info.instances }}"
 
     - name: debug2
-      debug: msg="{{ ec2instances }}"
+      debug: var="{{ ec2instances }}"
 
 
 
