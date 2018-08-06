@@ -4,12 +4,10 @@
   become: False
 
   tasks:
-    - name: Gather EC2 Facts
-        ec2_instance_facts:
-          region: us-west-2
-          filters:
-            "private_ip_address": "10.0.200.120"
-        register: ec2_info
+    - ec2_instance_facts:
+        filters:
+          "private_ip_address": "10.0.200.120"
+      register: ec2_info
 
     - name: Debug
         debug:
