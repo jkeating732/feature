@@ -1,13 +1,34 @@
 - hosts: localhost
   connection: local
-  gather_facts: True
+  gather_facts: False
   become: False
+  vars_files: 
+    - vars.yml
 
   tasks:
-    - ec2_instance_facts:
-        region: "us-west-2"
+    - name: Getting instance facts
+      ec2_instance_facts:
         filters:
           "private-ip-address": "10.0.200.120"
       register: ec2_info
 
-    - debug: msg="{{ ec2_info.instances[].id }}"
+    - name: Add all instance public IPs to host group
+      add_host: 
+        hostname: "{{ item.private_ip }}" 
+        groups: ec2hosts_ip
+      with_items: "{{ ec2_info.instances[].id }}"
+
+#---------------------------------------------
+#- hosts: localhost
+#  connection: local
+#  gather_facts: True
+#  become: False
+
+#  tasks:
+#    - ec2_instance_facts:
+#        region: "us-west-2"
+#        filters:
+#          "private-ip-address": "10.0.200.120"
+#      register: ec2_info
+
+#    - debug: msg="{{ ec2_info.instances[].id }}"
