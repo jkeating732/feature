@@ -5,16 +5,16 @@
 
   tasks:
     - name: Gather EC2 Facts
-      local_action:
-      module: ec2_instance_facts
-      region: us-west-2
-      filters:
-        "private_ip_address": "10.0.200.120"
-      register: ec2_info
+        local_action:
+        module: ec2_instance_facts
+        region: us-west-2
+        filters:
+          "private_ip_address": "10.0.200.120"
+        register: ec2_info
 
     - name: Debug
-      debug:
-        msg: "{{ ec2_info }}"
+        debug:
+          msg: "{{ ec2_info }}"
     
     #- name: Provision a set of instances
       #ec2:
