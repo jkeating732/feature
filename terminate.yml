@@ -6,6 +6,7 @@
   tasks:
     - name: Getting instance facts
       ec2_instance_facts:
+        region: us-west-2
         filters:
           "private-ip-address": "10.0.200.120"
       register: ec2_info
