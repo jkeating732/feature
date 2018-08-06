@@ -11,11 +11,14 @@
           "private-ip-address": "10.0.200.120"
       register: ec2_info
 
+    - name: debug
+      debug: msg=msg="{{ ec2_info }}"
+
     - name: Add all instance public IPs to host group
       add_host: 
-        hostname: "{{ item.id }}" 
+        hostname: "{{ item }}" 
         groups: ec2instanceid
-      with_items: "{{ ec2_info.instances[] }}"
+      with_items: "{{ ec2_info.instance_ids }}"
 
 #---------------------------------------------
 #- hosts: localhost
