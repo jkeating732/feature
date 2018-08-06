@@ -7,7 +7,7 @@
     - name: Gather EC2 Facts
       ec2_remote_facts:
         region: us-west-2
-      register: ec2-facts
+      register: ec2_facts
 
     - name: Debug
       debug:
