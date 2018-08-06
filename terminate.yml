@@ -9,8 +9,7 @@
           "private_ip_address": "10.0.200.120"
       register: ec2_info
 
-    - name: Debug
-        debug: var=ec2_info
+    - debug: msg="{{ ec2_info }}"
     
     #- name: Provision a set of instances
       #ec2:
