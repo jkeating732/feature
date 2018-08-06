@@ -17,8 +17,11 @@
     - name: Add all instance public IPs to host group
       add_host: 
         hostname: "{{ item }}" 
-        groups: ec2instanceid
-      with_items: "{{ ec2_info.instances.[].instance_id }}"
+        groups: ec2instances
+      with_items: "{{ ec2_info.instances }}"
+
+    - name: test
+      debug: msg="{{ ec2instances.instance_id }}"
 
 #---------------------------------------------
 #- hosts: localhost
