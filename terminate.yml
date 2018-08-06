@@ -10,4 +10,4 @@
           "private-ip-address": "10.0.200.120"
       register: ec2_info
 
-    - debug: msg="{{ ec2_info.id }}"
+    - debug: msg="{{ ec2_info.instances[].id }}"
