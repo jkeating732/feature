@@ -2,8 +2,6 @@
   connection: local
   gather_facts: False
   become: False
-  vars_files: 
-    - vars.yml
 
   tasks:
     - name: Getting instance facts
