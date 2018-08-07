@@ -15,16 +15,10 @@
       with_items: "{{ inventory_hostname }}"
       register: ec2_info
 
-    - name: debug
-      debug: msg="{{ ec2_info.results }}"
-
-    - name: get simple
-      set_fact:
-        results: "{{ ec2_info.results }}"  
-
-    - name: get instances
-      set_fact:
-        instances: "{{ results.instances }}"
+    - name: Display Instance IDs
+      debug:
+        var: item
+      loop: "{{ ec2_info| json_query(results.instances[*].instance_id) }}"
 
 
     #- name: debug
