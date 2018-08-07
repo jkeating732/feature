@@ -18,9 +18,9 @@
     - name: debug
       debug: msg="{{ ec2_info.results }}"
 
-    - name: Add all instance public IPs to host group
+    - name: Add all instance private IPs to host group
       add_host: 
-        results: "{{ item }}" 
+        results: "{{ item.instances }}" 
         groups: ec2results
       with_items: "{{ ec2_info.results }}"
     
