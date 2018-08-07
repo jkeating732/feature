@@ -6,7 +6,7 @@
   tasks:
     - name: Curl test
       uri:
-        url: https://${!TOWER_HOST}/api/v2/inventories/58/hosts/
+        url: https://10.0.100.92/api/v2/inventories/58/hosts/
         method: GET
         body_format: json
         validate_certs: no
