@@ -22,7 +22,7 @@
       add_host: 
         results: "{{ item }}" 
         groups: ec2results
-      with_items: "{{ ec2_info.msg }}"
+      with_items: "{{ ec2_info.results }}"
     
     - name: debug2
       debug: msg="{{ groups['ec2results'] }}"
@@ -39,3 +39,5 @@
         #state: stopped
         #instance_ids: "{{ item }}"
       #with_items: "{{ groups['ec2instances'] }}"
+
+      
