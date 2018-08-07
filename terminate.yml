@@ -23,8 +23,15 @@
       set_fact:
         instance: "{{ item.instances }}"
       with_items: "{{ ec2_info.results }}"
+      register: instances
 
-
+    - name: Create Instance ID List
+      set_fact:
+        instance_id: "{{ instances.instance_id | list }}"
+    
+    - name: Print instance ids
+      debug: var=instance_id
+      
 
     #- name: debug
       #debug: msg="{{ ec2_info.results }}"
