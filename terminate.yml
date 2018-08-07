@@ -28,6 +28,10 @@
       #vars:
         #server_ip_query: "instances[?private_ip_address=='{{ inventory_hostname }}'].instance_id"
 
+    - name: initialize an empty list
+      set_fact:
+        instanceids_strings: []
+
     - name: Display Instance IDs based on ip
       set_fact:
         instanceids_strings: "{{ instanceids_strings + [ item ] }}"
