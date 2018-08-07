@@ -22,7 +22,7 @@
     - name: Display Instance IDs
       debug:
         var: item
-      loop: "{{ ec2_info| json_query('instances[*].instance_id') }}"
+      loop: "{{ ec2_info| json_query('results.instances[*].instance_id') }}"
 
 
     #- name: debug
