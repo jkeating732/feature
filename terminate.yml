@@ -9,7 +9,7 @@
         region: us-west-2
         filters:
           "private-ip-address": "{{ item }}"
-      with_items: <%= evm[:hostname] %>
+      with_items: "{{ inventory_hostname }}"
       register: ec2_info
 
     - name: debug
