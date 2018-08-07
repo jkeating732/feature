@@ -20,7 +20,7 @@
 
     - name: get simple
       set_fact:
-        simple_value: "{{ (ec2_info | from_json) }}"  
+        simple_value: "{{ ec2_info.results | from_json }}"  
 
     - name: debug 2
       debug: msg="{{ simple_value }}"
