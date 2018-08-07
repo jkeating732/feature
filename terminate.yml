@@ -15,19 +15,9 @@
       with_items: "{{ inventory_hostname }}"
       register: ec2_info
 
-    - name: Iterate JSON - DEBUG
-      debug: var=item.['instances'].instance_id
-      with_items: "{{ ec2_info.results }}"
-
-    - name: Iterate JSON
+    - name: get simple
       set_fact:
-        instance: "{{ item.instances.instance_id }}"
-      with_items: "{{ ec2_info.results }}"
-      register: instances
-
-    - name: show instances
-      debug: var=instances
-      
+        simple_value: "{{ (ec2_info.results | from_json) | map(attribute='instance_id')| list }}"  
 
     #- name: debug
       #debug: msg="{{ ec2_info.results }}"
