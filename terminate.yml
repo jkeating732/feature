@@ -16,7 +16,7 @@
       register: ec2_info
 
     - name: debug
-      debug: msg="{{ ec2_info.results }}"
+      debug: msg="{{ ec2_info }}"
 
     - name: get simple
       set_fact:
