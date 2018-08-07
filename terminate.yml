@@ -15,19 +15,6 @@
     - name: debug
       debug: msg="{{ ec2_info }}"
 
-    #- name: Display Instance IDs
-      #debug:
-        #var: item
-      #loop: "{{ ec2_info| json_query('instances[*].instance_id') }}"
-
-    #- name: Display Instance IDs based on ip #######This works
-      #add_host: 
-        #hostname: "{{ item }}"
-        #groups: ec2instances
-      #loop: "{{ ec2_info| json_query(server_ip_query) }}"
-      #vars:
-        #server_ip_query: "instances[?private_ip_address=='{{ inventory_hostname }}'].instance_id"
-
     - name: initialize an empty list
       set_fact:
         instanceids_strings: []
@@ -38,29 +25,6 @@
       loop: "{{ ec2_info| json_query(server_ip_query) }}"
       vars:
         server_ip_query: "instances[?private_ip_address=='{{ inventory_hostname }}'].instance_id"
-
-
-        #filters:
-          #"private-ip-address": "{{ item }}"
-      #with_items: "{{ inventory_hostname }}"
-
-    #- name: debug
-      #debug: msg="{{ ec2_info.results }}"
-
-    #- name: Add all instance private IPs to host group
-      #add_host: 
-        #results: "{{ item.instances }}" 
-        #groups: ec2results
-      #with_items: "{{ ec2_info.results }}"
-    
-    #- name: debug2
-      #debug: msg="{{ groups['ec2results'] }}"
-  
-    #- name: Add all instance public IPs to host group
-      #add_host: 
-        #hostname: "{{ item.instance_id }}" 
-        #groups: ec2instances
-      #with_items: "{{ ec2_info.instances }}"
 
     - name: Term instances
       ec2:
