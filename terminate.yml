@@ -16,7 +16,7 @@
       register: ec2_info
 
     - name: debug
-      debug: msg="{{ ec2_info.msg.results }}"
+      debug: msg="{{ ec2_info.msg.['results'] }}"
   
     #- name: Add all instance public IPs to host group
       #add_host: 
