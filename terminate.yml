@@ -16,7 +16,7 @@
       register: ec2_info
 
     - name: Iterate JSON - DEBUG
-      debug: var=item.instances.instance_id
+      debug: var=item.['instances'].instance_id
       with_items: "{{ ec2_info.results }}"
 
     - name: Iterate JSON
