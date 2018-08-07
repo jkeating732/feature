@@ -22,8 +22,10 @@
       set_fact:
         results: "{{ ec2_info.results }}"  
 
-    - name: debug 2
-      debug: msg="{{ simple_value }}"
+    - name: get instances
+      set_fact:
+        instances: "{{ results.instances }}"
+
 
     #- name: debug
       #debug: msg="{{ ec2_info.results }}"
