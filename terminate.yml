@@ -20,13 +20,21 @@
         #var: item
       #loop: "{{ ec2_info| json_query('instances[*].instance_id') }}"
 
+    #- name: Display Instance IDs based on ip #######This works
+      #add_host: 
+        #hostname: "{{ item }}"
+        #groups: ec2instances
+      #loop: "{{ ec2_info| json_query(server_ip_query) }}"
+      #vars:
+        #server_ip_query: "instances[?private_ip_address=='{{ inventory_hostname }}'].instance_id"
+
     - name: Display Instance IDs based on ip
-      add_host: 
-        hostname: "{{ item }}"
-        groups: ec2instances
+      set_fact:
+        instanceids_strings: "{{ instanceids_strings + [ item ] }}"
       loop: "{{ ec2_info| json_query(server_ip_query) }}"
       vars:
         server_ip_query: "instances[?private_ip_address=='{{ inventory_hostname }}'].instance_id"
+
 
         #filters:
           #"private-ip-address": "{{ item }}"
@@ -55,6 +63,6 @@
         region: us-west-2
         state: stopped
         instance_ids: "{{ item }}"
-      with_items: "{{ groups['ec2instances'] }}"
+      with_items: "{{ instanceids_strings }}"
 
       
