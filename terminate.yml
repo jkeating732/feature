@@ -20,6 +20,16 @@
         var: item
       loop: "{{ ec2_info| json_query('instances[*].instance_id') }}"
 
+    - name: Display Instance IDs ip
+      debug:
+        var: item
+      loop: "{{ ec2_info| json_query(server_ip_query)"
+      vars:
+        server_ip_query: "instances[*].[?private-ip-address=={{ inventory_hostname }}].instance_id) }}"
+
+        #filters:
+          #"private-ip-address": "{{ item }}"
+      #with_items: "{{ inventory_hostname }}"
 
     #- name: debug
       #debug: msg="{{ ec2_info.results }}"
