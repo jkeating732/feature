@@ -4,21 +4,12 @@
   become: False
 
   tasks:
-    - name: Curl test
-      uri:
-        url: https://10.0.100.92/api/v2/inventories/58/hosts/
-        method: GET
-        body_format: json
-        validate_certs: no
-        return_content: yes
-        headers:
-          Content-Type: "application/json"
-    
     - name: Getting instance facts
       ec2_instance_facts:
         region: us-west-2
         filters:
-          "private-ip-address": "10.0.200.120"
+          "private-ip-address": "{{ item }}"
+      with_items: <%= evm[:hostname] %>
       register: ec2_info
 
     - name: debug
