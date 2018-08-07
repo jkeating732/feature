@@ -15,6 +15,9 @@
       with_items: "{{ inventory_hostname }}"
       register: ec2_info
 
+    - name: debug
+      debug: msg="{{ ec2_info.results }}"
+
     - name: get simple
       set_fact:
         simple_value: "{{ (ec2_info.results | from_json) | map(attribute='instance_id')| list }}"  
