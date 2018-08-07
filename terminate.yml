@@ -7,26 +7,33 @@
     - name: debug1
       debug: msg="{{ inventory_hostname }}"
 
-    - name: Getting instance facts
-      ec2_instance_facts:
-        region: us-west-2
-        filters:
-          "private-ip-address": "{{ item }}"
-      with_items: "{{ inventory_hostname }}"
-      register: ec2_info
-
-    - name: debug
-      debug: msg="{{ ec2_info.instances }}"
-  
-    - name: Add all instance public IPs to host group
-      add_host: 
-        hostname: "{{ item.instance_id }}" 
-        groups: ec2instances
-      with_items: "{{ ec2_info.instances }}"
-
-    - name: Term instances
+    - name: Term Instances
       ec2:
         region: us-west-2
         state: stopped
         instance_ids: "{{ item }}"
-      with_items: "{{ groups['ec2instances'] }}"
+      with_items: "{{ inventory_hostname }}"
+
+    #- name: Getting instance facts
+      #ec2_instance_facts:
+        #region: us-west-2
+        #filters:
+          #"private-ip-address": "{{ item }}"
+      #with_items: "{{ inventory_hostname }}"
+      #register: ec2_info
+
+    #- name: debug
+      #debug: msg="{{ ec2_info.instances }}"
+  
+    #- name: Add all instance public IPs to host group
+      #add_host: 
+        #hostname: "{{ item.instance_id }}" 
+        #groups: ec2instances
+      #with_items: "{{ ec2_info.instances }}"
+
+    #- name: Term instances
+      #ec2:
+        #region: us-west-2
+        #state: stopped
+        #instance_ids: "{{ item }}"
+      #with_items: "{{ groups['ec2instances'] }}"
