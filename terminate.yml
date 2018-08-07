@@ -15,15 +15,18 @@
       with_items: "{{ inventory_hostname }}"
       register: ec2_info
 
-    - name: Add all instance public IPs to host group
-      add_host: 
-        hostname: "{{ item.instance_id }}" 
-        groups: ec2instances
-      with_items: "{{ ec2_info.instances }}"
+    - name: debug
+      debug: msg="{{ ec2_info }}"
+  
+    #- name: Add all instance public IPs to host group
+      #add_host: 
+        #hostname: "{{ item.instance_id }}" 
+        #groups: ec2instances
+      #with_items: "{{ ec2_info.instances }}"
 
-    - name: Term instances
-      ec2:
-        region: us-west-2
-        state: stopped
-        instance_ids: "{{ item }}"
-      with_items: "{{ groups['ec2instances'] }}"
+    #- name: Term instances
+      #ec2:
+        #region: us-west-2
+        #state: stopped
+        #instance_ids: "{{ item }}"
+      #with_items: "{{ groups['ec2instances'] }}"
