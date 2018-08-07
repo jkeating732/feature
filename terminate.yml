@@ -15,10 +15,10 @@
     - name: debug
       debug: msg="{{ ec2_info }}"
 
-    - name: Display Instance IDs
-      debug:
-        var: item
-      loop: "{{ ec2_info| json_query('instances[*].instance_id') }}"
+    #- name: Display Instance IDs
+      #debug:
+        #var: item
+      #loop: "{{ ec2_info| json_query('instances[*].instance_id') }}"
 
     - name: Display Instance IDs based on ip
       add_host: 
