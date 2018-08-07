@@ -15,10 +15,14 @@
       with_items: "{{ inventory_hostname }}"
       register: ec2_info
 
-    - name: Iterate JSON
+    - name: Iterate JSON - DEBUG
       debug: var=item.instances
       with_items: "{{ ec2_info.results }}"
 
+    - name: Iterate JSON
+      set_fact:
+        instance: "{{ item.instances }}"
+      with_items: "{{ ec2_info.results }}"
 
 
 
