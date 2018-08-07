@@ -16,11 +16,11 @@
       register: ec2_info
 
     - name: debug
-      debug: msg="{{ ec2_info }}"
+      debug: msg="{{ ec2_info.results }}"
 
     - name: get simple
       set_fact:
-        simple_value: "{{ ec2_info.results | from_json }}"  
+        results: "{{ ec2_info.results }}"  
 
     - name: debug 2
       debug: msg="{{ simple_value }}"
