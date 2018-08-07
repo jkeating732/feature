@@ -21,7 +21,7 @@
 
     - name: Iterate JSON
       set_fact:
-        instance: "{{ item.instances }}"
+        instance: "{{ item }}"
       with_items: "{{ ec2_info.results }}"
       register: instances
 
