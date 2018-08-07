@@ -25,7 +25,7 @@
         region: us-west-2
         state: stopped
         instance_ids: "{{ item }}"
-      with_items: groups.ec2instances
+      with_items: groups['ec2instances']
 
 
 
