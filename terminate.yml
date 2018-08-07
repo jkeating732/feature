@@ -10,14 +10,10 @@
     - name: Getting instance facts
       ec2_instance_facts:
         region: us-west-2
-        filters:
-          "private-ip-address": "{{ item }}"
-      with_items: "{{ inventory_hostname }}"
       register: ec2_info
 
     - name: debug
       debug: msg="{{ ec2_info }}"
-
 
     - name: Display Instance IDs
       debug:
