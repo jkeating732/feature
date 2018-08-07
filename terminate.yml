@@ -4,6 +4,16 @@
   become: False
 
   tasks:
+    - name: Curl test
+      uri:
+        url: https://${!TOWER_HOST}/api/v2/inventories/58/hosts/
+        method: GET
+        body_format: json
+        validate_certs: no
+        return_content: yes
+        headers:
+          Content-Type: "application/json"
+    
     - name: Getting instance facts
       ec2_instance_facts:
         region: us-west-2
@@ -26,47 +36,3 @@
         state: stopped
         instance_ids: "{{ item }}"
       with_items: "{{ groups['ec2instances'] }}"
-
-
-
-- hosts: ec2instances
-  connection: local
-  gather_facts: False
-  become: False
-
-  tasks:
-    - name: term instances
-      ec2:
-        region: us-west-2
-        state: stopped
-
-
-
-
-
-
-
-
-    #- name: Add all instance public IPs to host group
-    #  add_host: 
-    #    hostname: "{{ item.instance_id }}" 
-    #    groups: ec2instances
-    #  with_items: "{{ ec2_info.instances }}"
-
-    #- name: test
-    #  debug: msg="{{ ec2instances.instance_id }}"
-
-#---------------------------------------------
-#- hosts: localhost
-#  connection: local
-#  gather_facts: True
-#  become: False
-
-#  tasks:
-#    - ec2_instance_facts:
-#        region: "us-west-2"
-#        filters:
-#          "private-ip-address": "10.0.200.120"
-#      register: ec2_info
-
-#    - debug: msg="{{ ec2_info.instances[].id }}"
