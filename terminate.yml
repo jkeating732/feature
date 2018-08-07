@@ -1,4 +1,4 @@
-- hosts: localhost
+- hosts: all
   connection: local
   gather_facts: False
   become: False
@@ -6,7 +6,7 @@
   tasks:
     - name: debug1
       debug: msg="{{ inventory_hostname }}"
-      
+
     - name: Getting instance facts
       ec2_instance_facts:
         region: us-west-2
