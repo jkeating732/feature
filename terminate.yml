@@ -27,7 +27,7 @@
 
     - name: Create Instance ID List
       set_fact:
-        instance_id: "{{ instances.instance_id | list }}"
+        instance_id: "{{ instances.instances.instance_id | list }}"
     
     - name: Print instance ids
       debug: var=instance_id
