@@ -34,7 +34,7 @@
     - name: Terminate instances with instance-id(s)
       ec2:
         region: us-west-2
-        state: stopped # Avaialable states: present,absent,running,restarted,stopped 
+        state: absent # Avaialable states: present,absent,running,restarted,stopped 
         instance_ids: "{{ item }}"
       with_items: "{{ instanceids_strings }}"
 
