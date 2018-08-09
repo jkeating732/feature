@@ -25,7 +25,7 @@
         vpc_subnet_id: subnet-42de4824
         group_id: sg-5efc7d23
         instance_type: t2.micro
-        instance_profile_name: ec2-demo-hosts
+        instance_profile_name: ec2-demo
         image: "{{ ami_id }}"
         wait: yes 
         exact_count: 2
