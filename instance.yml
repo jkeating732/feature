@@ -8,8 +8,11 @@
   tasks:
     - name: Create Instance Profile
       shell: |
-        aws create-instance-profile --instance-profile-name ec2-demo-hosts
-        aws add-role-to-instance-profile --instance-profile-name ec2-demo-hosts --role-name S3ReadOnlyAccess
+        aws iam create-instance-profile --instance-profile-name ec2-demo-hosts
+        aws iam add-role-to-instance-profile --instance-profile-name ec2-demo-hosts --role-name S3ReadOnlyAccess
+      environment:
+        AWS_ACCESS_KEY_ID: "{{ lookup('env','AWS_ACCESS_KEY') }}"
+        AWS_SECRET_ACCESS_KEY: "{{ lookup('env','AWS_SECRET_KEY') }}"
     - name: Provision a set of instances
       ec2:
         key_name: LinuxKeyPair
@@ -40,8 +43,6 @@
     - name: wait 60 seconds and continue
       wait_for: timeout=60
       delegate_to: localhost
-
-
 
     - name: Wait for system to become reachable
       wait_for:
