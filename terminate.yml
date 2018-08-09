@@ -37,5 +37,9 @@
         state: absent # Avaialable states: present,absent,running,restarted,stopped 
         instance_ids: "{{ item }}"
       with_items: "{{ instanceids_strings }}"
+    
+    - name: Terminate instance profile
+      shell: |
+        aws iam delete-instance-profile --instance-profile-name ec2-demo-hosts
 
       

@@ -6,6 +6,10 @@
     - vars.yml
 
   tasks:
+    - name: Create Instance Profile
+      shell: |
+        aws create-instance-profile --instance-profile-name ec2-demo-hosts
+        aws add-role-to-instance-profile --instance-profile-name ec2-demo-hosts --role-name S3ReadOnlyAccess
     - name: Provision a set of instances
       ec2:
         key_name: LinuxKeyPair
@@ -13,6 +17,7 @@
         vpc_subnet_id: subnet-42de4824
         group_id: sg-5efc7d23
         instance_type: t2.micro
+        instance_profile_name: ec2-demo-hosts
         image: "{{ ami_id }}"
         wait: yes 
         exact_count: 2
@@ -35,6 +40,8 @@
     - name: wait 60 seconds and continue
       wait_for: timeout=60
       delegate_to: localhost
+
+
 
     - name: Wait for system to become reachable
       wait_for:
@@ -61,3 +68,4 @@
         BUCKET=nasa-new4
         KEY=`aws s3 ls $BUCKET --recursive | sort | tail -n 1 | awk '{print $4}'`
         aws s3 cp s3://$BUCKET/$KEY ./latest-object.zip
+        ls -la
