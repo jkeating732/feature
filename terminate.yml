@@ -39,7 +39,7 @@
       with_items: "{{ instanceids_strings }}"
     
     - name: Terminate instance profile
-      shell: |
+      command: >
         aws iam delete-instance-profile --instance-profile-name ec2-demo-hosts
       environment:
         AWS_ACCESS_KEY_ID: "{{ lookup('env','AWS_ACCESS_KEY') }}"
