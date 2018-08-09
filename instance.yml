@@ -68,10 +68,15 @@
       shell: |
         yum install python -y
         yum install python-pip -y
+        yum install unzip -y
         pip install awscli
     - name: Get S3 bucket listing & download
       shell: |
         BUCKET=nasa-new4
         KEY=`aws s3 ls $BUCKET --recursive | sort | tail -n 1 | awk '{print $4}'`
         aws s3 cp s3://$BUCKET/$KEY ./latest-object.zip
+        unzip ./latest-object.zip
+        ls -la
+        cd latest-object.zip
+        pwd
         ls -la
