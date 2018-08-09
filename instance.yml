@@ -55,7 +55,7 @@
       shell: |
         yum install python -y
         yum install python-pip -y
-        pip install awscli -y
+        pip install awscli
     - name: Get S3 bucket listing & download
       shell: |
         BUCKET=nasa-new4
